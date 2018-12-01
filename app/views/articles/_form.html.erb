@@ -1,4 +1,5 @@
-<%= form_for :article, url: articles_path do |f| %>
+<%= render 'errors' %>
+<%= form_for @article do |f| %>
 <p>
   <%= f.label :title %>
   <%= f.text_field :title %>
