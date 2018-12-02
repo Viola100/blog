@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 #zamiast góry
 resources :articles
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :comments
 end
