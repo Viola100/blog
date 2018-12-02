@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 #  delete 'articles/:id', to: 'articles#destroy'
 
 #zamiast góry
-resources :articles
+resources :articles do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :comments
+end
 end
