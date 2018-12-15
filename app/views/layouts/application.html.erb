@@ -6,8 +6,34 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-  </head>
+</head>
+
   <body>
+    <% if notice %>
+    <div class="alert alert-info">
+     <%= notice %>
+    </div>
+    <% else%>
+    <%= link_to 'Sign in', new_user_session_path %>
+    <%= link_to 'Sign up', new_user_registration_path %>
+    <% end %>
+
+   <% if alert %>
+   <div class="alert alert-danger">
+    <%= alert %>
+   </div>
+   <% end %>
+
+
+   <% if user_signed_in? %>
+   <p>
+     Hello <% current_user.email %>
+     <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+   </p>
+   <% end %>
+
+
+
     <div class="container">
       <%= yield %>
     </div>
