@@ -3,6 +3,7 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
 
   def index
     @articles = Article.all.order(id: :desc)
+    @articles = @articles.where("? = any(tags)", params[:q]) if params[:q].present?
   end
 
 
@@ -36,6 +37,8 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
     end
   end
 
+
+
   def destroy
     @article.destroy
     redirect_to articles_path
@@ -44,7 +47,7 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
 private
 
  def article_params
-  params.require(:article).permit(:title, :text)
+  params.require(:article).permit(:title, :text, :tags)
  end
 
 

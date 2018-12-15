@@ -7,12 +7,19 @@
   <strong>Text:</strong>
    <%= @article.text %>
 </p>
+<p>
+  <strong>Tags:</strong>
+   <%= @article.tags %>
+ </p>
+
 
 <h2>Comments</h2>
 
   <%= render @article.comments %>
 
   <%= render 'comments/form' %>
+
+
 
 
 <%= link_to 'Back', articles_path %>
