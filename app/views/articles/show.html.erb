@@ -9,7 +9,9 @@
 </p>
 <p>
   <strong>Tags:</strong>
-   <%= @article.tags %>
+   <% @article.tags.each do |tag| %>
+    <%= link_to tag, articles_path(q: tag), class: "badge badge-dark" %>
+   <% end %>
  </p>
 
 
