@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   @comment = Comment.new(comment_params)
   @comment.article = @article
   if @comment.save
+    flash[:notice] = "Your comment is saved"
    redirect_to article_path(@article)
    session[:commenter] = @comment.commenter
   else
