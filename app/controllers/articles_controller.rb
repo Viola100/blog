@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 before_action :find_article,only: [:show, :edit, :update, :destroy]
+before_action :authenticate_user!, except: [:show, :index]
+before_action :authorize_article, only: [:destroy, :edit, :update]
 
   def index
     @articles = Article.all.order(id: :desc)
