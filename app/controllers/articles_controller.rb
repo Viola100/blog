@@ -29,13 +29,11 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-    if @article.user != current_user && !current_user.admin?
-      flash[:alert] = "You are not allowed to be here"
-      return redirect_to article_path
-    end
+    return unless authorize_article
   end
 
   def update
+    return unless authorize_article
     if @article.update(article_params)
       flash[:notice] = "Your article is update"
       redirect_to article_path(@article)
@@ -47,16 +45,24 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
 
 
   def destroy
-    if @article.user != current_user && !current_user.admin?
-      flash[:alert] = "You are not allowed to be here"
-      return redirect_to article_path
-    end
+    return unless authorize_article
     @article.destroy
     flash[:alert] = "Article removed"
     redirect_to articles_path
   end
 
 private
+
+
+def authorize_article
+  if @article.user != current_user && !current_user&.admin?
+    flash[:alert] = "You are not allowed to be here"
+    redirect_to article_path
+   false
+  else
+   true
+  end
+end
 
  def article_params
   params.require(:article).permit(:title, :text, :tags, :user)
