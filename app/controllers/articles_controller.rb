@@ -29,11 +29,9 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
   end
 
   def edit
-    if @article.user != current_user
+    if @article.user != current_user && !current_user.admin?
       flash[:alert] = "You are not allowed to be here"
       redirect_to article_path
-    else
-      flash[:notice] = "Your article is changed"
     end
   end
 
