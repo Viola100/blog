@@ -31,7 +31,7 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
   def edit
     if @article.user != current_user && !current_user.admin?
       flash[:alert] = "You are not allowed to be here"
-      redirect_to article_path
+      return redirect_to article_path
     end
   end
 
@@ -47,6 +47,10 @@ before_action :find_article,only: [:show, :edit, :update, :destroy]
 
 
   def destroy
+    if @article.user != current_user && !current_user.admin?
+      flash[:alert] = "You are not allowed to be here"
+      return redirect_to article_path
+    end
     @article.destroy
     flash[:alert] = "Article removed"
     redirect_to articles_path
