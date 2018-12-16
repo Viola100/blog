@@ -27,7 +27,6 @@ before_action :authorize_article, only: [:destroy, :edit, :update]
 
   def show
     @comment = Comment.new
-    @comment.commenter = session[:commenter]
   end
 
   def edit
